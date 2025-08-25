@@ -28,16 +28,104 @@ export default function Portfolio() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [skillsInView, setSkillsInView] = useState(false);
 
-  const skills = [
-    { name: "JavaScript", level: 90 },
-    { name: "React", level: 85 },
-    { name: "Next.js", level: 80 },
-    { name: "TypeScript", level: 75 },
-    { name: "Python", level: 70 },
-    { name: "Node.js", level: 75 },
-    { name: "TailwindCSS", level: 85 },
-    { name: "SQL", level: 65 },
-  ];
+  const skills = {
+    frontend: [
+      { name: "TypeScript", level: 75, experience: "1年半 (React, Next.js)" },
+      {
+        name: "React",
+        level: 85,
+      },
+      { name: "Next.js", level: 80, experience: "1年半" },
+    ],
+    backend: [
+      { name: "Nest.js", level: 70, experience: "1年半 (Prisma, GraphQL)" },
+      { name: "Go", level: 30, experience: "3ヶ月 (Echo - 個人開発)" },
+      { name: "GraphQL", level: 60, experience: "" },
+    ],
+    infrastructure: [
+      { name: "Docker", level: 60, experience: "1年" },
+      { name: "AWS", level: 30, experience: "1ヶ月" },
+      { name: "Terraform", level: 30, experience: "1ヶ月" },
+    ],
+    others: [
+      { name: "GitHub Actions", level: 30, experience: "1ヶ月" },
+      { name: "Orval (OpenAPI)", level: 20, experience: "" },
+    ],
+  };
+
+  const detailedSkills = {
+    frontend: [
+      "UI開発、SPA構築",
+      "フレームワークの活用（React, Next.js, Nuxt.js）",
+      "状態管理（Redux Toolkit, React Hook Form, Tanstack Query）",
+      "レスポンシブデザイン対応",
+      "CSSプリプロセッサ利用経験",
+      "アクセシビリティ対応",
+      "テスト（Jest, React Testing Library）",
+      "アニメーションライブラリ利用",
+    ],
+    backend: [
+      "API開発（REST, GraphQL）",
+      "フレームワーク活用（Nest.js, FastAPI, Laravel, Ruby on Rails, Echo）",
+      "認証・認可の実装",
+      "ビジネスロジック設計",
+      "データバリデーション",
+      "バックエンドテスト（Mocha, PyTest, JUnit等）",
+      "タスクスケジューリング",
+    ],
+    infrastructure: [
+      "クラウドプラットフォーム構築（AWS, Azure）",
+      "コンテナ技術（Docker, Docker Compose）",
+      "構成管理（Terraform）",
+      "NginxによるWebサーバ設定",
+      "サーバーレス・オーケストレーション（Kubernetesは未経験）",
+    ],
+    database: [
+      "リレーショナルデータベース（PostgreSQL, MySQL）",
+      "NoSQLデータベース（未経験）",
+      "データベース設計・モデリング",
+      "クエリ最適化",
+      "バックアップ・リストア",
+    ],
+    devops: [
+      "CI/CDパイプライン構築（GitHub Actions）",
+      "バージョン管理（Git）",
+      "自動テスト",
+      "インフラ構成管理（Terraform）",
+    ],
+    security: [
+      "セキュアコーディング",
+      "脆弱性診断（基礎のみ）",
+      "認証・認可（OAuth, OpenID Connect）",
+      "暗号化技術の利用",
+    ],
+    testingQuality: [
+      "ユニットテスト",
+      "統合テスト",
+      "E2Eテスト",
+      "静的コード解析",
+      "コードレビュー",
+    ],
+    projectManagement: [
+      "アジャイル開発（スクラム、カンバン）",
+      "課題管理（Jira, Trello, GitHub Projects）",
+      "ドキュメント管理（Markdown, Notion, Confluence）",
+    ],
+    designUX: [
+      "プロトタイピング（Figma, Adobe XD）",
+      "デザインシステム構築",
+      "ユーザーリサーチ",
+      "ワイヤーフレーム作成",
+    ],
+    otherToolsSkills: [
+      "コマンドラインツール利用",
+      "API設計・ドキュメント（OpenAPI, Orval）",
+      "パフォーマンス最適化",
+      "多言語対応（i18n/l10n）",
+      "Google Apps Script",
+      "Azure Document Intelligence, Azure AI Search",
+    ],
+  };
 
   const projects = [
     {
@@ -126,8 +214,8 @@ export default function Portfolio() {
             {/* Desktop Navigation */}
             <div className="hidden md:flex space-x-8">
               {[
-                { id: "about", label: "Home" },
-                { id: "skills", label: "Articles" },
+                { id: "about", label: "Top" },
+                { id: "skills", label: "Skills" },
                 { id: "projects", label: "Projects" },
               ].map(({ id, label }) => (
                 <button
@@ -162,8 +250,8 @@ export default function Portfolio() {
             <div className="md:hidden border-t border-gray-700 bg-gray-900">
               <div className="px-2 py-3 space-y-1">
                 {[
-                  { id: "about", label: "Home" },
-                  { id: "skills", label: "Articles" },
+                  { id: "about", label: "Top" },
+                  { id: "skills", label: "Skills" },
                   { id: "projects", label: "Projects" },
                 ].map(({ id, label }) => (
                   <button
@@ -207,10 +295,9 @@ export default function Portfolio() {
               <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-blue-400/20 to-purple-400/20"></div>
             </div>
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-              田中 太郎
+              kankankanp
             </h1>
-            <div className="text-xl md:text-2xl text-blue-200 mb-4 font-medium">
-              Full Stack Developer
+            <div className="text-xl md:text-2xl text-blue-200 mb-4 font-medium">Software Developer
             </div>
             <p className="text-lg md:text-xl text-gray-300 mb-12 leading-relaxed max-w-3xl mx-auto">
               モダンなWebアプリケーションの構築に情熱を注ぐフルスタック開発者。
@@ -262,24 +349,267 @@ export default function Portfolio() {
       <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
-            Articles & Skills
+            Skills
           </h2>
+
+          {/* 言語・フレームワーク・ツール経験 */}
+          <h3 className="text-2xl font-bold text-gray-800 mb-6">
+            言語・フレームワーク・ツール経験
+          </h3>
+          <div className="mb-12 grid md:grid-cols-2 gap-8">
+            <div>
+              <h4 className="text-xl font-semibold text-gray-700 mb-4">
+                Frontend
+              </h4>
+              <ul className="list-none space-y-2">
+                {skills.frontend.map((skill, index) => (
+                  <li key={index} className="text-gray-700 mb-4">
+                    <div className="flex items-center mb-2">
+                      <span className="inline-block w-2 h-2 mr-2 bg-blue-500 rounded-full"></span>
+                      <strong>{skill.name}</strong>
+                    </div>
+                    {skill.level && (
+                      <div className="flex items-center w-full">
+                        <Progress
+                          value={skill.level}
+                          className="h-2 flex-grow"
+                        />
+                        <span className="ml-2 text-sm text-gray-600">
+                          {skill.level}%
+                        </span>
+                      </div>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-xl font-semibold text-gray-700 mb-4">
+                Backend
+              </h4>
+              <ul className="list-none space-y-2">
+                {skills.backend.map((skill, index) => (
+                  <li key={index} className="text-gray-700 mb-4">
+                    <div className="flex items-center mb-2">
+                      <span className="inline-block w-2 h-2 mr-2 bg-green-500 rounded-full"></span>
+                      <strong>{skill.name}</strong>
+                    </div>
+                    {skill.level && (
+                      <div className="flex items-center w-full">
+                        <Progress
+                          value={skill.level}
+                          className="h-2 flex-grow"
+                        />
+                        <span className="ml-2 text-sm text-gray-600">
+                          {skill.level}%
+                        </span>
+                      </div>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-xl font-semibold text-gray-700 mb-4">
+                Infrastructure
+              </h4>
+              <ul className="list-none space-y-2">
+                {skills.infrastructure.map((skill, index) => (
+                  <li key={index} className="text-gray-700 mb-4">
+                    <div className="flex items-center mb-2">
+                      <span className="inline-block w-2 h-2 mr-2 bg-purple-500 rounded-full"></span>
+                      <strong>{skill.name}</strong>
+                    </div>
+                    {skill.level && (
+                      <div className="flex items-center w-full">
+                        <Progress
+                          value={skill.level}
+                          className="h-2 flex-grow"
+                        />
+                        <span className="ml-2 text-sm text-gray-600">
+                          {skill.level}%
+                        </span>
+                      </div>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-xl font-semibold text-gray-700 mb-4">
+                Others
+              </h4>
+              <ul className="list-none space-y-2">
+                {skills.others.map((skill, index) => (
+                  <li key={index} className="text-gray-700 mb-4">
+                    <div className="flex items-center mb-2">
+                      <span className="inline-block w-2 h-2 mr-2 bg-yellow-500 rounded-full"></span>
+                      <strong>{skill.name}</strong>
+                    </div>
+                    {skill.level && (
+                      <div className="flex items-center w-full">
+                        <Progress
+                          value={skill.level}
+                          className="h-2 flex-grow"
+                        />
+                        <span className="ml-2 text-sm text-gray-600">
+                          {skill.level}%
+                        </span>
+                      </div>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* 詳細スキル */}
+          <h3 className="text-2xl font-bold text-gray-800 mb-6 mt-12">
+            詳細スキル
+          </h3>
           <div className="grid md:grid-cols-2 gap-8">
-            {skills.map((skill, index) => (
-              <div key={skill.name} className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="font-semibold text-gray-800">
-                    {skill.name}
-                  </span>
-                  <span className="text-sm text-gray-600">{skill.level}%</span>
-                </div>
-                <Progress
-                  value={skillsInView ? skill.level : 0}
-                  className="h-3 transition-all duration-1000 ease-out"
-                  style={{ transitionDelay: `${index * 100}ms` }}
-                />
-              </div>
-            ))}
+            <div>
+              <h4 className="text-xl font-semibold text-gray-700 mb-4">
+                フロントエンド (Frontend)
+              </h4>
+              <ul className="list-none space-y-2">
+                {detailedSkills.frontend.map((skill, index) => (
+                  <li key={index} className="flex items-start text-gray-700">
+                    <span className="inline-block w-2 h-2 mt-2 mr-2 bg-blue-500 rounded-full flex-shrink-0"></span>
+                    {skill}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-xl font-semibold text-gray-700 mb-4">
+                バックエンド (Backend)
+              </h4>
+              <ul className="list-none space-y-2">
+                {detailedSkills.backend.map((skill, index) => (
+                  <li key={index} className="flex items-start text-gray-700">
+                    <span className="inline-block w-2 h-2 mt-2 mr-2 bg-green-500 rounded-full flex-shrink-0"></span>
+                    {skill}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-xl font-semibold text-gray-700 mb-4">
+                インフラ (Infrastructure)
+              </h4>
+              <ul className="list-none space-y-2">
+                {detailedSkills.infrastructure.map((skill, index) => (
+                  <li key={index} className="flex items-start text-gray-700">
+                    <span className="inline-block w-2 h-2 mt-2 mr-2 bg-purple-500 rounded-full flex-shrink-0"></span>
+                    {skill}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-xl font-semibold text-gray-700 mb-4">
+                データベース (Database)
+              </h4>
+              <ul className="list-none space-y-2">
+                {detailedSkills.database.map((skill, index) => (
+                  <li key={index} className="flex items-start text-gray-700">
+                    <span className="inline-block w-2 h-2 mt-2 mr-2 bg-red-500 rounded-full flex-shrink-0"></span>
+                    {skill}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-xl font-semibold text-gray-700 mb-4">
+                DevOps
+              </h4>
+              <ul className="list-none space-y-2">
+                {detailedSkills.devops.map((skill, index) => (
+                  <li key={index} className="flex items-start text-gray-700">
+                    <span className="inline-block w-2 h-2 mt-2 mr-2 bg-orange-500 rounded-full flex-shrink-0"></span>
+                    {skill}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-xl font-semibold text-gray-700 mb-4">
+                セキュリティ (Security)
+              </h4>
+              <ul className="list-none space-y-2">
+                {detailedSkills.security.map((skill, index) => (
+                  <li key={index} className="flex items-start text-gray-700">
+                    <span className="inline-block w-2 h-2 mt-2 mr-2 bg-indigo-500 rounded-full flex-shrink-0"></span>
+                    {skill}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-xl font-semibold text-gray-700 mb-4">
+                テスト・品質管理 (Testing & Quality)
+              </h4>
+              <ul className="list-none space-y-2">
+                {detailedSkills.testingQuality.map((skill, index) => (
+                  <li key={index} className="flex items-start text-gray-700">
+                    <span className="inline-block w-2 h-2 mt-2 mr-2 bg-pink-500 rounded-full flex-shrink-0"></span>
+                    {skill}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-xl font-semibold text-gray-700 mb-4">
+                プロジェクト管理 (Project Management)
+              </h4>
+              <ul className="list-none space-y-2">
+                {detailedSkills.projectManagement.map((skill, index) => (
+                  <li key={index} className="flex items-start text-gray-700">
+                    <span className="inline-block w-2 h-2 mt-2 mr-2 bg-teal-500 rounded-full flex-shrink-0"></span>
+                    {skill}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-xl font-semibold text-gray-700 mb-4">
+                デザイン・UX (Design & UX)
+              </h4>
+              <ul className="list-none space-y-2">
+                {detailedSkills.designUX.map((skill, index) => (
+                  <li key={index} className="flex items-start text-gray-700">
+                    <span className="inline-block w-2 h-2 mt-2 mr-2 bg-cyan-500 rounded-full flex-shrink-0"></span>
+                    {skill}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-xl font-semibold text-gray-700 mb-4">
+                その他ツール・技術 (Other Tools & Skills)
+              </h4>
+              <ul className="list-none space-y-2">
+                {detailedSkills.otherToolsSkills.map((skill, index) => (
+                  <li key={index} className="flex items-start text-gray-700">
+                    <span className="inline-block w-2 h-2 mt-2 mr-2 bg-gray-500 rounded-full flex-shrink-0"></span>
+                    {skill}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
@@ -337,26 +667,9 @@ export default function Portfolio() {
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-gray-300 mb-4">
-            お仕事のご依頼やご相談は、お気軽にお声がけください。
-          </p>
-          <Button
-            variant="outline"
-            className="text-white border-white/30 hover:bg-white hover:text-gray-900 transition-all duration-300"
-            asChild
-          >
-            <a href="mailto:contact@example.com">
-              <Mail className="w-4 h-4 mr-2" />
-              お問い合わせ
-            </a>
-          </Button>
-          <div className="mt-12 pt-8 border-t border-gray-700">
-            <p className="text-gray-400 text-sm">
-              © 2025 田中太郎. All rights reserved.
-            </p>
-          </div>
-        </div>
+        <p className="text-center text-gray-400 text-sm">
+          &copy;2025 kankankanp. All rights reserved.
+        </p>
       </footer>
     </div>
   );
