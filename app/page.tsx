@@ -22,149 +22,12 @@ import {
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
+import portfolioData from "@/lib/portfolioData.json";
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState("about");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [skillsInView, setSkillsInView] = useState(false);
-
-  const skills = {
-    frontend: [
-      { name: "TypeScript", level: 75, experience: "1年半 (React, Next.js)" },
-      {
-        name: "React",
-        level: 85,
-      },
-      { name: "Next.js", level: 80, experience: "1年半" },
-    ],
-    backend: [
-      { name: "Nest.js", level: 70, experience: "1年半 (Prisma, GraphQL)" },
-      { name: "Go", level: 30, experience: "3ヶ月 (Echo - 個人開発)" },
-      { name: "GraphQL", level: 60, experience: "" },
-    ],
-    infrastructure: [
-      { name: "Docker", level: 60, experience: "1年" },
-      { name: "AWS", level: 30, experience: "1ヶ月" },
-      { name: "Terraform", level: 30, experience: "1ヶ月" },
-    ],
-    others: [
-      { name: "GitHub Actions", level: 30, experience: "1ヶ月" },
-      { name: "Orval (OpenAPI)", level: 20, experience: "" },
-    ],
-  };
-
-  const detailedSkills = {
-    frontend: [
-      "UI開発、SPA構築",
-      "フレームワークの活用（React, Next.js, Nuxt.js）",
-      "状態管理（Redux Toolkit, React Hook Form, Tanstack Query）",
-      "レスポンシブデザイン対応",
-      "CSSプリプロセッサ利用経験",
-      "アクセシビリティ対応",
-      "テスト（Jest, React Testing Library）",
-      "アニメーションライブラリ利用",
-    ],
-    backend: [
-      "API開発（REST, GraphQL）",
-      "フレームワーク活用（Nest.js, FastAPI, Laravel, Ruby on Rails, Echo）",
-      "認証・認可の実装",
-      "ビジネスロジック設計",
-      "データバリデーション",
-      "バックエンドテスト（Mocha, PyTest, JUnit等）",
-      "タスクスケジューリング",
-    ],
-    infrastructure: [
-      "クラウドプラットフォーム構築（AWS, Azure）",
-      "コンテナ技術（Docker, Docker Compose）",
-      "構成管理（Terraform）",
-      "NginxによるWebサーバ設定",
-      "サーバーレス・オーケストレーション（Kubernetesは未経験）",
-    ],
-    database: [
-      "リレーショナルデータベース（PostgreSQL, MySQL）",
-      "NoSQLデータベース（未経験）",
-      "データベース設計・モデリング",
-      "クエリ最適化",
-      "バックアップ・リストア",
-    ],
-    devops: [
-      "CI/CDパイプライン構築（GitHub Actions）",
-      "バージョン管理（Git）",
-      "自動テスト",
-      "インフラ構成管理（Terraform）",
-    ],
-    security: [
-      "セキュアコーディング",
-      "脆弱性診断（基礎のみ）",
-      "認証・認可（OAuth, OpenID Connect）",
-      "暗号化技術の利用",
-    ],
-    testingQuality: [
-      "ユニットテスト",
-      "統合テスト",
-      "E2Eテスト",
-      "静的コード解析",
-      "コードレビュー",
-    ],
-    projectManagement: [
-      "アジャイル開発（スクラム、カンバン）",
-      "課題管理（Jira, Trello, GitHub Projects）",
-      "ドキュメント管理（Markdown, Notion, Confluence）",
-    ],
-    designUX: [
-      "プロトタイピング（Figma, Adobe XD）",
-      "デザインシステム構築",
-      "ユーザーリサーチ",
-      "ワイヤーフレーム作成",
-    ],
-    otherToolsSkills: [
-      "コマンドラインツール利用",
-      "API設計・ドキュメント（OpenAPI, Orval）",
-      "パフォーマンス最適化",
-      "多言語対応（i18n/l10n）",
-      "Google Apps Script",
-      "Azure Document Intelligence, Azure AI Search",
-    ],
-  };
-
-  const projects = [
-    {
-      title: "E-commerce Platform",
-      description:
-        "A full-stack e-commerce solution with user authentication, payment processing, and admin dashboard.",
-      technologies: ["React", "Node.js", "MongoDB", "Stripe"],
-      link: "https://github.com",
-      image:
-        "https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800",
-    },
-    {
-      title: "Task Management App",
-      description:
-        "A collaborative task management application with real-time updates and team collaboration features.",
-      technologies: ["Next.js", "TypeScript", "PostgreSQL", "Socket.io"],
-      link: "https://github.com",
-      image:
-        "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800",
-    },
-    {
-      title: "Weather Dashboard",
-      description:
-        "A responsive weather dashboard with location-based forecasts and interactive data visualizations.",
-      technologies: ["React", "Chart.js", "Weather API", "TailwindCSS"],
-      link: "https://github.com",
-      image:
-        "https://images.pexels.com/photos/1118873/pexels-photo-1118873.jpeg?auto=compress&cs=tinysrgb&w=800",
-    },
-    {
-      title: "Portfolio Website",
-      description:
-        "A modern, responsive portfolio website built with Next.js and featuring smooth animations.",
-      technologies: ["Next.js", "TailwindCSS", "Framer Motion", "TypeScript"],
-      link: "https://github.com",
-      image:
-        "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800",
-    },
-  ];
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -277,27 +140,23 @@ export default function Portfolio() {
         <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
           <div className="absolute inset-0 bg-black/20"></div>
           {/* Animated background elements */}
-          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-          <div
-            className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"
-            style={{ animationDelay: "1s" }}
-          ></div>
         </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <div className="mb-12">
+        <div className="z-10 max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 w-full pt-[64px] pb-4">
+          <div className="pt-4">
             <div className="relative inline-block mb-8">
               <img
-                src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop"
+                src="profile.png"
                 alt="Profile"
-                className="w-40 h-40 rounded-full mx-auto shadow-2xl border-4 border-white/20"
+                className="w-[200px] h-[200px] rounded-full mx-auto shadow-2xl border-2 border-white/20 object-cover"
               />
               <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-blue-400/20 to-purple-400/20"></div>
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+            <h1 className="text-4xl md:text-7xl font-bold text-white mb-6 leading-tight">
               kankankanp
             </h1>
-            <div className="text-xl md:text-2xl text-blue-200 mb-4 font-medium">Software Developer
+            <div className="text-xl md:text-2xl text-blue-200 mb-4 font-medium">
+              Software Developer
             </div>
             <p className="text-lg md:text-xl text-gray-300 mb-12 leading-relaxed max-w-3xl mx-auto">
               モダンなWebアプリケーションの構築に情熱を注ぐフルスタック開発者。
@@ -307,18 +166,17 @@ export default function Portfolio() {
           </div>
 
           {/* Social Links */}
-          <div className="flex justify-center space-x-6 mb-12">
+          <div className="flex gap-4 flex-col">
             {[
-              { icon: Github, href: "https://github.com", label: "GitHub" },
-              {
-                icon: Linkedin,
-                href: "https://linkedin.com",
-                label: "LinkedIn",
-              },
               {
                 icon: Mail,
                 href: "mailto:contact@example.com",
                 label: "Email",
+              },
+              {
+                icon: Linkedin,
+                href: "https://linkedin.com",
+                label: "LinkedIn",
               },
             ].map(({ icon: Icon, href, label }) => (
               <Button
@@ -336,12 +194,6 @@ export default function Portfolio() {
             ))}
           </div>
 
-          {/* Scroll indicator */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-              <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -362,7 +214,7 @@ export default function Portfolio() {
                 Frontend
               </h4>
               <ul className="list-none space-y-2">
-                {skills.frontend.map((skill, index) => (
+                {portfolioData.skills.frontend.map((skill, index) => (
                   <li key={index} className="text-gray-700 mb-4">
                     <div className="flex items-center mb-2">
                       <span className="inline-block w-2 h-2 mr-2 bg-blue-500 rounded-full"></span>
@@ -389,7 +241,7 @@ export default function Portfolio() {
                 Backend
               </h4>
               <ul className="list-none space-y-2">
-                {skills.backend.map((skill, index) => (
+                {portfolioData.skills.backend.map((skill, index) => (
                   <li key={index} className="text-gray-700 mb-4">
                     <div className="flex items-center mb-2">
                       <span className="inline-block w-2 h-2 mr-2 bg-green-500 rounded-full"></span>
@@ -416,7 +268,7 @@ export default function Portfolio() {
                 Infrastructure
               </h4>
               <ul className="list-none space-y-2">
-                {skills.infrastructure.map((skill, index) => (
+                {portfolioData.skills.infrastructure.map((skill, index) => (
                   <li key={index} className="text-gray-700 mb-4">
                     <div className="flex items-center mb-2">
                       <span className="inline-block w-2 h-2 mr-2 bg-purple-500 rounded-full"></span>
@@ -443,7 +295,7 @@ export default function Portfolio() {
                 Others
               </h4>
               <ul className="list-none space-y-2">
-                {skills.others.map((skill, index) => (
+                {portfolioData.skills.others.map((skill, index) => (
                   <li key={index} className="text-gray-700 mb-4">
                     <div className="flex items-center mb-2">
                       <span className="inline-block w-2 h-2 mr-2 bg-yellow-500 rounded-full"></span>
@@ -476,7 +328,7 @@ export default function Portfolio() {
                 フロントエンド (Frontend)
               </h4>
               <ul className="list-none space-y-2">
-                {detailedSkills.frontend.map((skill, index) => (
+                {portfolioData.detailedSkills.frontend.map((skill, index) => (
                   <li key={index} className="flex items-start text-gray-700">
                     <span className="inline-block w-2 h-2 mt-2 mr-2 bg-blue-500 rounded-full flex-shrink-0"></span>
                     {skill}
@@ -490,7 +342,7 @@ export default function Portfolio() {
                 バックエンド (Backend)
               </h4>
               <ul className="list-none space-y-2">
-                {detailedSkills.backend.map((skill, index) => (
+                {portfolioData.detailedSkills.backend.map((skill, index) => (
                   <li key={index} className="flex items-start text-gray-700">
                     <span className="inline-block w-2 h-2 mt-2 mr-2 bg-green-500 rounded-full flex-shrink-0"></span>
                     {skill}
@@ -504,12 +356,14 @@ export default function Portfolio() {
                 インフラ (Infrastructure)
               </h4>
               <ul className="list-none space-y-2">
-                {detailedSkills.infrastructure.map((skill, index) => (
-                  <li key={index} className="flex items-start text-gray-700">
-                    <span className="inline-block w-2 h-2 mt-2 mr-2 bg-purple-500 rounded-full flex-shrink-0"></span>
-                    {skill}
-                  </li>
-                ))}
+                {portfolioData.detailedSkills.infrastructure.map(
+                  (skill, index) => (
+                    <li key={index} className="flex items-start text-gray-700">
+                      <span className="inline-block w-2 h-2 mt-2 mr-2 bg-purple-500 rounded-full flex-shrink-0"></span>
+                      {skill}
+                    </li>
+                  )
+                )}
               </ul>
             </div>
 
@@ -518,7 +372,7 @@ export default function Portfolio() {
                 データベース (Database)
               </h4>
               <ul className="list-none space-y-2">
-                {detailedSkills.database.map((skill, index) => (
+                {portfolioData.detailedSkills.database.map((skill, index) => (
                   <li key={index} className="flex items-start text-gray-700">
                     <span className="inline-block w-2 h-2 mt-2 mr-2 bg-red-500 rounded-full flex-shrink-0"></span>
                     {skill}
@@ -532,7 +386,7 @@ export default function Portfolio() {
                 DevOps
               </h4>
               <ul className="list-none space-y-2">
-                {detailedSkills.devops.map((skill, index) => (
+                {portfolioData.detailedSkills.devops.map((skill, index) => (
                   <li key={index} className="flex items-start text-gray-700">
                     <span className="inline-block w-2 h-2 mt-2 mr-2 bg-orange-500 rounded-full flex-shrink-0"></span>
                     {skill}
@@ -546,7 +400,7 @@ export default function Portfolio() {
                 セキュリティ (Security)
               </h4>
               <ul className="list-none space-y-2">
-                {detailedSkills.security.map((skill, index) => (
+                {portfolioData.detailedSkills.security.map((skill, index) => (
                   <li key={index} className="flex items-start text-gray-700">
                     <span className="inline-block w-2 h-2 mt-2 mr-2 bg-indigo-500 rounded-full flex-shrink-0"></span>
                     {skill}
@@ -560,12 +414,14 @@ export default function Portfolio() {
                 テスト・品質管理 (Testing & Quality)
               </h4>
               <ul className="list-none space-y-2">
-                {detailedSkills.testingQuality.map((skill, index) => (
-                  <li key={index} className="flex items-start text-gray-700">
-                    <span className="inline-block w-2 h-2 mt-2 mr-2 bg-pink-500 rounded-full flex-shrink-0"></span>
-                    {skill}
-                  </li>
-                ))}
+                {portfolioData.detailedSkills.testingQuality.map(
+                  (skill, index) => (
+                    <li key={index} className="flex items-start text-gray-700">
+                      <span className="inline-block w-2 h-2 mt-2 mr-2 bg-pink-500 rounded-full flex-shrink-0"></span>
+                      {skill}
+                    </li>
+                  )
+                )}
               </ul>
             </div>
 
@@ -574,12 +430,14 @@ export default function Portfolio() {
                 プロジェクト管理 (Project Management)
               </h4>
               <ul className="list-none space-y-2">
-                {detailedSkills.projectManagement.map((skill, index) => (
-                  <li key={index} className="flex items-start text-gray-700">
-                    <span className="inline-block w-2 h-2 mt-2 mr-2 bg-teal-500 rounded-full flex-shrink-0"></span>
-                    {skill}
-                  </li>
-                ))}
+                {portfolioData.detailedSkills.projectManagement.map(
+                  (skill, index) => (
+                    <li key={index} className="flex items-start text-gray-700">
+                      <span className="inline-block w-2 h-2 mt-2 mr-2 bg-teal-500 rounded-full flex-shrink-0"></span>
+                      {skill}
+                    </li>
+                  )
+                )}
               </ul>
             </div>
 
@@ -588,7 +446,7 @@ export default function Portfolio() {
                 デザイン・UX (Design & UX)
               </h4>
               <ul className="list-none space-y-2">
-                {detailedSkills.designUX.map((skill, index) => (
+                {portfolioData.detailedSkills.designUX.map((skill, index) => (
                   <li key={index} className="flex items-start text-gray-700">
                     <span className="inline-block w-2 h-2 mt-2 mr-2 bg-cyan-500 rounded-full flex-shrink-0"></span>
                     {skill}
@@ -602,12 +460,14 @@ export default function Portfolio() {
                 その他ツール・技術 (Other Tools & Skills)
               </h4>
               <ul className="list-none space-y-2">
-                {detailedSkills.otherToolsSkills.map((skill, index) => (
-                  <li key={index} className="flex items-start text-gray-700">
-                    <span className="inline-block w-2 h-2 mt-2 mr-2 bg-gray-500 rounded-full flex-shrink-0"></span>
-                    {skill}
-                  </li>
-                ))}
+                {portfolioData.detailedSkills.otherToolsSkills.map(
+                  (skill, index) => (
+                    <li key={index} className="flex items-start text-gray-700">
+                      <span className="inline-block w-2 h-2 mt-2 mr-2 bg-gray-500 rounded-full flex-shrink-0"></span>
+                      {skill}
+                    </li>
+                  )
+                )}
               </ul>
             </div>
           </div>
@@ -621,7 +481,7 @@ export default function Portfolio() {
             Projects
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
-            {projects.map((project, index) => (
+            {portfolioData.projects.map((project, index) => (
               <Card
                 key={index}
                 className="group hover:shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden"
