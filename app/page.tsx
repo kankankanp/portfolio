@@ -1,17 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import {
-  Github,
-  Linkedin,
-  Mail,
-  ExternalLink,
-  Code,
-  User,
-  Briefcase,
-  Menu,
-  X,
-} from "lucide-react";
+import { Linkedin, Mail, ExternalLink, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -28,6 +18,14 @@ export default function Portfolio() {
   const [activeSection, setActiveSection] = useState("about");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [skillsInView, setSkillsInView] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -52,7 +50,6 @@ export default function Portfolio() {
         setActiveSection(current);
       }
 
-      // Check if skills section is in view
       const skillsElement = document.getElementById("skills");
       if (skillsElement) {
         const rect = skillsElement.getBoundingClientRect();
@@ -68,13 +65,10 @@ export default function Portfolio() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white">
-      {/* Navigation Header */}
       <header className="fixed top-0 left-0 right-0 bg-gray-900/95 backdrop-blur-sm z-50">
         <nav className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="font-bold text-xl text-white">Portfolio</div>
-
-            {/* Desktop Navigation */}
             <div className="hidden md:flex space-x-8">
               {[
                 { id: "about", label: "Top" },
@@ -108,7 +102,6 @@ export default function Portfolio() {
             </button>
           </div>
 
-          {/* Mobile Navigation */}
           {mobileMenuOpen && (
             <div className="md:hidden border-t border-gray-700 bg-gray-900">
               <div className="px-2 py-3 space-y-1">
@@ -131,15 +124,12 @@ export default function Portfolio() {
         </nav>
       </header>
 
-      {/* About Section */}
       <section
         id="about"
         className="relative min-h-screen flex items-center justify-center overflow-hidden"
       >
-        {/* Background with gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
           <div className="absolute inset-0 bg-black/20"></div>
-          {/* Animated background elements */}
         </div>
 
         <div className="z-10 max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 w-full pt-[64px] pb-4">
@@ -164,8 +154,6 @@ export default function Portfolio() {
               ユーザー体験を重視した、美しく機能的なソフトウェアの開発を得意としています。
             </p>
           </div>
-
-          {/* Social Links */}
           <div className="flex gap-4 flex-col">
             {[
               {
@@ -193,18 +181,13 @@ export default function Portfolio() {
               </Button>
             ))}
           </div>
-
         </div>
       </section>
-
-      {/* Skills Section */}
       <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
             Skills
           </h2>
-
-          {/* 言語・フレームワーク・ツール経験 */}
           <h3 className="text-2xl font-bold text-gray-800 mb-6">
             言語・フレームワーク・ツール経験
           </h3>
@@ -262,7 +245,6 @@ export default function Portfolio() {
                 ))}
               </ul>
             </div>
-
             <div>
               <h4 className="text-xl font-semibold text-gray-700 mb-4">
                 Infrastructure
@@ -289,7 +271,6 @@ export default function Portfolio() {
                 ))}
               </ul>
             </div>
-
             <div>
               <h4 className="text-xl font-semibold text-gray-700 mb-4">
                 Others
@@ -318,7 +299,6 @@ export default function Portfolio() {
             </div>
           </div>
 
-          {/* 詳細スキル */}
           <h3 className="text-2xl font-bold text-gray-800 mb-6 mt-12">
             詳細スキル
           </h3>
@@ -474,7 +454,6 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* Projects Section */}
       <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
@@ -525,7 +504,6 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="bg-gray-900 text-white py-16 px-4 sm:px-6 lg:px-8">
         <p className="text-center text-gray-400 text-sm">
           &copy;2025 kankankanp. All rights reserved.
